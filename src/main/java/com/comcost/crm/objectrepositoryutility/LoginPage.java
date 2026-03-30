@@ -1,0 +1,57 @@
+package com.comcost.crm.objectrepositoryutility;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+/*
+ * LoginPage class:
+ * Represents the Loginpage and provides methods to interact with its elements.
+ */
+
+public class LoginPage {
+
+	WebDriver driver;
+	//Constructor
+	public LoginPage(WebDriver driver) {
+		PageFactory.initElements(driver, this);
+	}
+	
+	@FindBy(name="user_name")
+	private WebElement usernameTextField;
+	
+	@FindAll({@FindBy(name="user_password"),@FindBy(xpath="//input[@type='password']")})
+	private WebElement passwordTextField;
+	
+	@FindBy(id="submitButton")
+	private WebElement loginButton;
+
+	public WebElement getUsernameTextField() {
+		return usernameTextField;
+	}
+
+	public WebElement getPasswordTextField() {
+		return passwordTextField;
+	}
+
+	public WebElement getLoginButton() {
+		return loginButton;
+	}
+	
+	public void logintoApp(String username , String password) {
+		usernameTextField.sendKeys("admin");
+		passwordTextField.sendKeys("password");
+		loginButton.click();
+	}
+	
+	public void logintoAppwithurl(String url,String username , String password) {
+		driver.get(url);
+		usernameTextField.sendKeys(username);
+		passwordTextField.sendKeys(password);
+		loginButton.click();
+	}
+	
+	
+}
